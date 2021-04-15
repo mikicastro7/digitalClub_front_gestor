@@ -8,3 +8,25 @@ section h2 {
   margin-bottom: 20px;
   font-size: 36px;
 }
+
+.add-noticia a {
+  font-size: 20px;
+  display: inline-block;
+  margin: auto;
+  background-color: #007bff;
+  color: white;
+  border-radius: 10px;
+  padding: 8px 16px;
+  transition: 0.5s;
+}
+
+.add-noticia a:hover {
+  background-color: #0069d9;
+  color: white;
+  text-decoration: none;
+}
+
+.add-noticia {
+  text-align: center;
+  margin-bottom: 20px;
+}
