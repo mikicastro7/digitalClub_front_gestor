@@ -1,9 +1,9 @@
 import React from "react";
 
 const Noticias = () => (
-  <div>
-    <h1>Noticias</h1>
-  </div>
+  <section>
+    <h2>Noticias</h2>
+  </section>
 );
 
 export default Noticias;
