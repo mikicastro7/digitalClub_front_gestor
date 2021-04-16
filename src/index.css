@@ -30,3 +30,30 @@ section h2 {
   text-align: center;
   margin-bottom: 20px;
 }
+
+.input-noticia {
+  width: 80%;
+  border: none;
+  border-bottom: 2px solid #aedff6;
+  overflow: hidden;
+  resize: none;
+  margin: 20px 10px;
+  padding: 2px 20px;
+}
+
+.input-noticia:focus {
+  outline: none;
+  border-bottom: 2px solid #007bff;
+  transition: .5s ease
+}
+
+.input-titular-noticia {
+  text-align: center;
+  font-size: 36px;
+}
+
+
+.form-crear-noticia {
+  display: flex;
+  flex-direction: column;
+}
