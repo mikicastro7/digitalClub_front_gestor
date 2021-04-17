@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./Components/UIcomponents/Navbar";
-import Noticias from "./Components/Noticias/Noticias";
+import Noticias from "./paginas/Noticias";
 import AddNoticia from "./Components/Noticias/AddNoticia";
 
 const App = () => (
