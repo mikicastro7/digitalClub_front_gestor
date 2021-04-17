@@ -90,10 +90,13 @@ ul.noticia-content {
   font-size: 26px;
   padding: 0px 5px;
   margin: 0px 10px;
+}
+
+.button-normal-colors {
   color: rgb(78, 78, 78);
 }
 
-.noticia-functional-buttons button:hover {
+.button-normal-colors:hover {
   color: black;
 }
 
@@ -113,6 +116,15 @@ ul.noticia-content {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.noticia .noticia-dates {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.noticia-dates span {
+  font-weight: bolder;
 }
 
 /*Media queries*/
