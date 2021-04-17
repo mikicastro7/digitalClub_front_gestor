@@ -6,9 +6,9 @@ import AddNoticia from "./Components/Noticias/AddNoticia";
 
 const App = () => (
   <>
-    <Navbar />
-    <div className="container">
-      <Router>
+    <Router>
+      <Navbar />
+      <div className="container">
         <Switch>
           <Route path="/noticias" exact>
             <Noticias />
@@ -17,8 +17,8 @@ const App = () => (
             <AddNoticia />
           </Route>
         </Switch>
-      </Router>
-    </div>
+      </div>
+    </Router>
   </>
 );
 
