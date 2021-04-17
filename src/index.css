@@ -32,7 +32,7 @@ section h2 {
 }
 
 .input-noticia {
-  width: 80%;
+  width: 90%;
   border: none;
   border-bottom: 2px solid #aedff6;
   overflow: hidden;
@@ -54,10 +54,25 @@ section h2 {
 
 
 .form-crear-noticia {
+  border: 1px solid red;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  border: 2px solid #aedff6;
+  border-radius: 15px;
+  padding: 20px 10px;
 }
 
+.crear-noticia-img {
+  width: 90%;
+  border: 2px solid black;
+  border-radius: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
 
 section h2 {
   margin-top: 20px;
@@ -127,9 +142,41 @@ ul.noticia-content {
   font-weight: bolder;
 }
 
+.input-img-noticia {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.label-img-noticia span {
+  display: block;
+  font-size: 100px;
+  color: #007bff;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5;
+}
+
+.label-img-noticia span:hover {
+  color: #0069d9;
+}
+
+.label-img-noticia {
+  font-size: 24px;
+}
+
 /*Media queries*/
 @media only screen and (min-width: 768px) {
   .noticia img {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .crear-noticia-img {
     width: 70%;
   }
 }

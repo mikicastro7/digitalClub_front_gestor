@@ -5,6 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
+const CaretDown = styled.div`
+    color: ${open ? "#007bff" : "#aedff6"};
+    &:hover {
+    color: ${open ? "#aedff6" : "#007bff"};
+  }
+  `;
+
 const Noticia = ({
   noticia: {
     // eslint-disable-next-line camelcase
@@ -12,12 +19,6 @@ const Noticia = ({
   }
 }) => {
   const [open, setOpen] = useState(false);
-  const CaretDown = styled.button`
-    color: ${open ? "#007bff" : "#aedff6"};
-    &:hover {
-    color: ${open ? "#aedff6" : "#007bff"};
-  }
-  `;
   const noticiaDesplegarHandler = () => {
     setOpen(!open);
   };
