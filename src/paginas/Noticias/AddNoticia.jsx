@@ -9,7 +9,7 @@ import { Redirect } from "react-router-dom";
 import ContextoNoticias from "../../Contextos/ContextoNoticias";
 
 const AddNoticia = () => {
-  const { addNoticiaHandler } = useContext(ContextoNoticias);
+  const { enterNoticiaHandler } = useContext(ContextoNoticias);
   const [img, setImg] = useState("");
   const [titulo, setTitulo] = useState("");
   const [text, setText] = useState("");
@@ -51,7 +51,7 @@ const AddNoticia = () => {
   const formSubmissionHandler = (e) => {
     e.preventDefault();
     if (formIsValid) {
-      addNoticiaHandler(titulo, text);
+      enterNoticiaHandler(titulo, text);
     }
     return <Redirect to="/" />;
   };
