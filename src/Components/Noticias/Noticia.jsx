@@ -17,7 +17,9 @@ const Noticia = ({
 
   const formatDate = () => {
     const date = new Date(createdAt);
-    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+    console.log(date.getMinutes());
+    const minutos = date.getMinutes();
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${minutos >= 9 ? minutos : `0${minutos}`}`;
   };
 
   return (
@@ -59,7 +61,7 @@ Noticia.propTypes = {
       alt: PropTypes.string.isRequired
     }),
     created_at: PropTypes.string.isRequired,
-    texto: PropTypes.string.isRequired,
+    texto: PropTypes.string,
   })
 };
 
