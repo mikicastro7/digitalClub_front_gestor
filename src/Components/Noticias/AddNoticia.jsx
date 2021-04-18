@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
 const AddNoticia = () => {
-  const [img, setImg] = useState("/img_muestra.jpg");
+  const [img, setImg] = useState("");
 
   const changeImgHandler = (e) => {
     const reader = new FileReader();
@@ -14,7 +14,9 @@ const AddNoticia = () => {
         setImg(reader.result);
       }
     };
-    reader.readAsDataURL(e.target.files[0]);
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
   };
   return (
     <section>
@@ -22,12 +24,12 @@ const AddNoticia = () => {
       <form className="form-crear-noticia">
         <TextareaAutosize name="titulo" className="input-noticia input-titular-noticia" placeholder="Titular de la noticia" />
         <TextareaAutosize name="cuerpo" className="input-noticia" placeholder="texto de la noticia" />
-        <img className="crear-noticia-img" src={img} alt="" />
         <label className="label-img-noticia" htmlFor="imagen">
-          <span><FontAwesomeIcon icon={faUpload} /></span>
+          {img ? <img className="crear-noticia-img" src={img} alt="" /> : <span><FontAwesomeIcon icon={faUpload} /></span>}
         </label>
         <input className="input-img-noticia" id="imagen" onChange={(e) => changeImgHandler(e)} name="imagen" accept="image/png,image/jpeg" type="file" />
         <TextareaAutosize name="alt" className="input-noticia" placeholder="pequeña descripcion de la foto ej: niño montado a caballo" />
+        <button type="submit" className="btn btn-primary">Publicar noticia</button>
       </form>
     </section>
   );
