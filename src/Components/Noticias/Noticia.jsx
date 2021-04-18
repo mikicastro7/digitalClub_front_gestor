@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { Collapse } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Noticia = ({
   noticia: {
-    img, created_at: createdAt, texto, titulo
+    _id, img, created_at: createdAt, texto, titulo
   }
 }) => {
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ const Noticia = ({
         <h3 role="presentation" onKeyDown={noticiaDesplegarHandler} onClick={noticiaDesplegarHandler} style={{ cursor: "pointer" }} className="noticia-title col-12 col-lg-9 text-center text-md-center text-lg-left">{titulo}</h3>
         <div className="noticia-functional-buttons col-12 col-lg-3 text-center text-md-center text-lg-right">
           <button type="button">
-            <FontAwesomeIcon className="button-normal-colors" icon={faEdit} />
+            <Link to={`/noticias/editar-noticia/${_id}`}><FontAwesomeIcon className="button-normal-colors" icon={faEdit} /></Link>
           </button>
           <button type="button">
             <FontAwesomeIcon className="button-normal-colors" icon={faTrashAlt} />
@@ -60,6 +60,7 @@ Noticia.propTypes = {
       alt: PropTypes.string.isRequired
     }),
     created_at: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     texto: PropTypes.string,
   })
 };
