@@ -41,10 +41,10 @@ const Noticia = ({
           <li>
             <p>{texto}</p>
           </li>
-          <img src={img.link} alt={img.alt} />
+          {img && <img src={img.link} alt={img.alt} />}
           <p className="noticia-dates">
             <span>Creada el: </span>
-            {formatDate()}
+            {createdAt && formatDate()}
           </p>
         </ul>
       </Collapse>

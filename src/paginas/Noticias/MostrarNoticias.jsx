@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import useFetch from "../hooks/useFetch";
-import Noticia from "../Components/Noticias/Noticia";
+import Noticia from "../../Components/Noticias/Noticia";
+import ContextoNoticias from "../../Contextos/ContextoNoticias";
 
-const Noticias = () => {
-  const { datos: datosNoticias, pedirDatos: pedirNoticias } = useFetch();
-
-  useEffect(() => {
-    pedirNoticias("https://digitalclub.herokuapp.com/noticias");
-  }, [pedirNoticias]);
+const MostrarNoticias = () => {
+  const { datosNoticias } = useContext(ContextoNoticias);
   return (
     <section>
       <h2>Noticias</h2>
@@ -31,4 +27,4 @@ const Noticias = () => {
   );
 };
 
-export default Noticias;
+export default MostrarNoticias;
