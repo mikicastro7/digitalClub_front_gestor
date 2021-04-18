@@ -28,7 +28,7 @@ const AddNoticia = () => {
           {img ? <img className="crear-noticia-img" src={img} alt="" /> : <span><FontAwesomeIcon icon={faUpload} /></span>}
         </label>
         <input className="input-img-noticia" id="imagen" onChange={(e) => changeImgHandler(e)} name="imagen" accept="image/png,image/jpeg" type="file" />
-        <TextareaAutosize name="alt" className="input-noticia" placeholder="pequeña descripcion de la foto ej: niño montado a caballo" />
+        <TextareaAutosize disabled={!img} name="alt" className="input-noticia" placeholder="pequeña descripcion de la foto ej: niño montado a caballo" />
         <button type="submit" className="btn btn-primary">Publicar noticia</button>
       </form>
     </section>
