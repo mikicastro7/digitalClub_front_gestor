@@ -115,6 +115,14 @@ ul.noticia-content {
   color: black;
 }
 
+.blue-colors {
+  color: #aedff6;
+}
+
+.blue-colors:hover {
+  color: #007bff;
+}
+
 .noticia p {
   padding: 10px 0px;
   margin: 10px 0px;

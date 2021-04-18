@@ -5,22 +5,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
-const CaretDown = styled.div`
-    color: ${open ? "#007bff" : "#aedff6"};
-    &:hover {
-    color: ${open ? "#aedff6" : "#007bff"};
-  }
-  `;
-
 const Noticia = ({
   noticia: {
-    // eslint-disable-next-line camelcase
-    img, create_add, texto, titulo
+    img, created_at: createdAt, texto, titulo
   }
 }) => {
   const [open, setOpen] = useState(false);
   const noticiaDesplegarHandler = () => {
     setOpen(!open);
+  };
+
+  const formatDate = () => {
+    const date = new Date(createdAt);
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
   };
 
   return (
@@ -35,7 +32,7 @@ const Noticia = ({
             <FontAwesomeIcon className="button-normal-colors" icon={faTrashAlt} />
           </button>
           <button type="button" onClick={() => setOpen(!open)}>
-            <CaretDown><FontAwesomeIcon icon={faCaretDown} /></CaretDown>
+            <FontAwesomeIcon className="blue-colors" icon={faCaretDown} />
           </button>
         </div>
       </div>
@@ -47,7 +44,7 @@ const Noticia = ({
           <img src={img.link} alt={img.alt} />
           <p className="noticia-dates">
             <span>Creada el: </span>
-            26-11-2000
+            {formatDate()}
           </p>
         </ul>
       </Collapse>
@@ -61,7 +58,7 @@ Noticia.propTypes = {
       link: PropTypes.string.isRequired,
       alt: PropTypes.string.isRequired
     }),
-    create_add: PropTypes.number,
+    created_at: PropTypes.string.isRequired,
     texto: PropTypes.string.isRequired,
   })
 };
