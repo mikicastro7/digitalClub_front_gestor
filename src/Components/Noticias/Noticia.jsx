@@ -17,7 +17,6 @@ const Noticia = ({
 
   const formatDate = () => {
     const date = new Date(createdAt);
-    console.log(date.getMinutes());
     const minutos = date.getMinutes();
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${minutos >= 9 ? minutos : `0${minutos}`}`;
   };
