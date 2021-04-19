@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { Redirect } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 
 const NoticiaForm = (props) => {
@@ -11,7 +12,7 @@ const NoticiaForm = (props) => {
       _id: id, titulo: tituloProp, texto: textoProp, img: imgProps
     } = {}, tipo, formAction
   } = props;
-
+  const [redirect, setRedirect] = useState(false);
   const [img, setImg] = useState(imgProps ? imgProps.link : "");
   const [imgFile, setImgFile] = useState("");
 
@@ -45,23 +46,29 @@ const NoticiaForm = (props) => {
 
   const formSubmissionHandler = (e) => {
     e.preventDefault();
+    setRedirect(true);
     formAction(formDatos.titulo, formDatos.text, id);
   };
 
   return (
-    <form onSubmit={formSubmissionHandler} className="form-crear-noticia">
-      <TextareaAutosize value={formDatos.titulo} onChange={modificarDatos} name="titulo" className="input-noticia input-titular-noticia" placeholder="Titular de la noticia" />
-      <TextareaAutosize value={formDatos.text} onChange={modificarDatos} name="text" className="input-noticia" placeholder="texto de la noticia" />
-      <label className="label-img-noticia" htmlFor="imagen">
-        {img ? <img className="crear-noticia-img" src={img} alt="" /> : <span><FontAwesomeIcon icon={faUpload} /></span>}
-      </label>
-      <input onChange={(e) => changeImgHandler(e)} className="input-img-noticia" id="imagen" name="imagen" accept="image/png,image/jpeg" type="file" />
-      <TextareaAutosize disabled={img === ""} name="alt" className="input-noticia" placeholder="pequeña descripcion de la foto ej: niño montado a caballo" />
-      <button type="submit" className="btn btn-primary">
-        {tipo === "Edit" ? "Editar " : "Publicar "}
-        noticia
-      </button>
-    </form>
+    <>
+      { redirect ? <Redirect to="/noticias" />
+        : (
+          <form onSubmit={formSubmissionHandler} className="form-crear-noticia">
+            <TextareaAutosize value={formDatos.titulo} onChange={modificarDatos} name="titulo" className="input-noticia input-titular-noticia" placeholder="Titular de la noticia" />
+            <TextareaAutosize value={formDatos.text} onChange={modificarDatos} name="text" className="input-noticia" placeholder="texto de la noticia" />
+            <label className="label-img-noticia" htmlFor="imagen">
+              {img ? <img className="crear-noticia-img" src={img} alt="" /> : <span><FontAwesomeIcon icon={faUpload} /></span>}
+            </label>
+            <input onChange={(e) => changeImgHandler(e)} className="input-img-noticia" id="imagen" name="imagen" accept="image/png,image/jpeg" type="file" />
+            <TextareaAutosize disabled={img === ""} name="alt" className="input-noticia" placeholder="pequeña descripcion de la foto ej: niño montado a caballo" />
+            <button type="submit" className="btn btn-primary">
+              {tipo === "Edit" ? "Editar " : "Publicar "}
+              noticia
+            </button>
+          </form>
+        )}
+    </>
   );
 };
 
