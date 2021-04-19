@@ -61,6 +61,7 @@ section h2 {
   border: 2px solid #aedff6;
   border-radius: 15px;
   padding: 20px 10px;
+  box-shadow: 10px 10px 10px #aedff649
 }
 
 .crear-noticia-img {
