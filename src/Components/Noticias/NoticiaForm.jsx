@@ -23,7 +23,7 @@ const NoticiaForm = (props) => {
   });
 
   const enteredTitleIsValid = formDatos.titulo.trim() !== "";
-  const enteredAltIsValid = formDatos.alt.trim().length > 5 || formDatos.img === "";
+  const enteredAltIsValid = formDatos.alt.trim().length > 5 || img === "";
 
   let formIsValid = false;
 
@@ -46,8 +46,10 @@ const NoticiaForm = (props) => {
 
   const formSubmissionHandler = (e) => {
     e.preventDefault();
-    setRedirect(true);
-    formAction(formDatos.titulo, formDatos.text, id);
+    if (formIsValid) {
+      setRedirect(true);
+      formAction(formDatos.titulo, formDatos.text, id);
+    }
   };
 
   return (
