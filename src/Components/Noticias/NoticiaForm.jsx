@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import useForm from "../../hooks/useForm";
 
 const NoticiaForm = (props) => {
   const {
@@ -11,13 +12,17 @@ const NoticiaForm = (props) => {
     } = {}, tipo, formAction
   } = props;
 
-  const [titulo, setTitulo] = useState(tituloProp || "");
-  const [text, setText] = useState(textoProp || "");
   const [img, setImg] = useState(imgProps ? imgProps.link : "");
-  const [alt, setAlt] = useState(imgProps ? imgProps.alt : "");
+  const [imgFile, setImgFile] = useState("");
 
-  const enteredTitleIsValid = titulo.trim() !== "";
-  const enteredAltIsValid = alt.trim().length > 5 || img === "";
+  const { formDatos, modificarDatos } = useForm({
+    titulo: tituloProp || "",
+    text: textoProp || "",
+    alt: imgProps ? imgProps.alt : ""
+  });
+
+  const enteredTitleIsValid = formDatos.titulo.trim() !== "";
+  const enteredAltIsValid = formDatos.alt.trim().length > 5 || formDatos.img === "";
 
   let formIsValid = false;
 
@@ -25,15 +30,8 @@ const NoticiaForm = (props) => {
     formIsValid = true;
   }
 
-  const tituloInputChangeHandler = (e) => {
-    setTitulo(e.target.value);
-  };
-
-  const textInputChangeHandler = (e) => {
-    setText(e.target.value);
-  };
-
   const changeImgHandler = (e) => {
+    setImgFile(e.target.files[0]);
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
@@ -47,13 +45,13 @@ const NoticiaForm = (props) => {
 
   const formSubmissionHandler = (e) => {
     e.preventDefault();
-    formAction(titulo, text, id);
+    formAction(formDatos.titulo, formDatos.text, id);
   };
 
   return (
     <form onSubmit={formSubmissionHandler} className="form-crear-noticia">
-      <TextareaAutosize value={titulo} onChange={tituloInputChangeHandler} name="titulo" className="input-noticia input-titular-noticia" placeholder="Titular de la noticia" />
-      <TextareaAutosize value={text} onChange={textInputChangeHandler} name="text" className="input-noticia" placeholder="texto de la noticia" />
+      <TextareaAutosize value={formDatos.titulo} onChange={modificarDatos} name="titulo" className="input-noticia input-titular-noticia" placeholder="Titular de la noticia" />
+      <TextareaAutosize value={formDatos.text} onChange={modificarDatos} name="text" className="input-noticia" placeholder="texto de la noticia" />
       <label className="label-img-noticia" htmlFor="imagen">
         {img ? <img className="crear-noticia-img" src={img} alt="" /> : <span><FontAwesomeIcon icon={faUpload} /></span>}
       </label>
