@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 import useForm from "../../hooks/useForm";
 
 const NoticiaForm = (props) => {
@@ -72,6 +72,20 @@ const NoticiaForm = (props) => {
         )}
     </>
   );
+};
+
+NoticiaForm.propTypes = {
+  datosNoticia: PropTypes.shape({
+    titulo: PropTypes.string.isRequired,
+    img: PropTypes.shape({
+      link: PropTypes.string,
+      alt: PropTypes.string
+    }),
+    _id: PropTypes.string.isRequired,
+    texto: PropTypes.string,
+  }),
+  tipo: PropTypes.string,
+  formAction: PropTypes.func
 };
 
 export default NoticiaForm;
