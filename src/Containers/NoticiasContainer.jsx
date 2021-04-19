@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { toast } from "react-toastify";
 import MostrarNoticias from "../paginas/Noticias/MostrarNoticias";
 import AddNoticia from "../paginas/Noticias/AddNoticia";
 import EditarNoticia from "../paginas/Noticias/EditarNoticia";
@@ -19,6 +20,7 @@ const Noticias = () => {
   }, [pedirNoticias]);
 
   const addNoticia = (titulo, texto, noticiaData) => {
+    toast("Noticia creada");
     const nuevaNoticia = {
       _id: noticiaData.id,
       texto,
@@ -43,6 +45,7 @@ const Noticias = () => {
   };
 
   const editNoticia = (titulo, texto, id) => {
+    toast("Noticia editada");
     setNoticias({ total: datosNoticias.total, datos: datosNoticias.datos.map(noticia => (noticia._id === id ? { ...noticia, titulo, texto } : noticia)) });
   };
 
@@ -61,6 +64,7 @@ const Noticias = () => {
   };
 
   const eliminarNoticia = (id) => {
+    toast("Noticia eliminada");
     setNoticias({ total: datosNoticias.total, datos: datosNoticias.datos.filter(noticia => noticia._id !== id) });
   };
 
