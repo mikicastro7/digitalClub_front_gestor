@@ -4,11 +4,13 @@ import TextareaAutosize from "react-textarea-autosize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
-const NoticiaForm = ({
-  datosNoticia: {
-    _id: id, titulo: tituloProp, texto: textoProp, img: imgProps
-  }, tipo, formAction
-}) => {
+const NoticiaForm = (props) => {
+  const {
+    datosNoticia: {
+      _id: id, titulo: tituloProp, texto: textoProp, img: imgProps
+    } = {}, tipo, formAction
+  } = props;
+
   const [titulo, setTitulo] = useState(tituloProp || "");
   const [text, setText] = useState(textoProp || "");
   const [img, setImg] = useState(imgProps ? imgProps.link : "");
