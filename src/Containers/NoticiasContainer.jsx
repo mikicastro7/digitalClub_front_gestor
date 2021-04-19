@@ -12,6 +12,7 @@ const Noticias = () => {
   const { datos: datosNoticias, pedirDatos: pedirNoticias, setDatos: setNoticias } = useFetch();
   const { sendRequest: sendNoticiaRequest } = useHttp();
   const { sendRequest: editNoticiaRequest } = useHttp();
+  const { sendRequest: eliminarNoticiaRequest } = useHttp();
 
   useEffect(() => {
     pedirNoticias("https://digitalclub.herokuapp.com/noticias");
@@ -59,8 +60,25 @@ const Noticias = () => {
     );
   };
 
+  const eliminarNoticia = (id) => {
+    setNoticias({ total: datosNoticias.total, datos: datosNoticias.datos.filter(noticia => noticia._id !== id) });
+  };
+
+  const eliminarNoticiaHandler = async (id) => {
+    eliminarNoticiaRequest(
+      {
+        url: `https://digitalclub.herokuapp.com/noticias/${id}`,
+        method: "DELETE",
+      },
+      eliminarNoticia.bind(null, id)
+    );
+  };
+
   return (
-    <ContextoNoticias.Provider value={{ datosNoticias, enterNoticiaHandler, editNoticiaHandler }}>
+    <ContextoNoticias.Provider value={{
+      datosNoticias, enterNoticiaHandler, editNoticiaHandler, eliminarNoticiaHandler
+    }}
+    >
       <Router>
         <Navbar />
         <div className="container">

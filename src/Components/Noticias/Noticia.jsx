@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Collapse } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import ContextoNoticias from "../../Contextos/ContextoNoticias";
 
 const Noticia = ({
   noticia: {
     _id, img, created_at: createdAt, texto, titulo
   }
 }) => {
+  const { eliminarNoticiaHandler } = useContext(ContextoNoticias);
   const [open, setOpen] = useState(false);
   const noticiaDesplegarHandler = () => {
     setOpen(!open);
+  };
+
+  const eliminarNoticiaOnClick = (id) => {
+    eliminarNoticiaHandler(id);
   };
 
   const formatDate = () => {
@@ -29,7 +35,7 @@ const Noticia = ({
           <button type="button">
             <Link to={`/noticias/editar-noticia/${_id}`}><FontAwesomeIcon className="button-normal-colors" icon={faEdit} /></Link>
           </button>
-          <button type="button">
+          <button onClick={() => eliminarNoticiaOnClick(_id)} type="button">
             <FontAwesomeIcon className="button-normal-colors" icon={faTrashAlt} />
           </button>
           <button type="button" onClick={() => setOpen(!open)}>
