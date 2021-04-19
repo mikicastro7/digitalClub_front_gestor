@@ -21,7 +21,8 @@ const Noticias = () => {
     const nuevaNoticia = {
       _id: noticiaData.id,
       texto,
-      titulo
+      titulo,
+      created_at: new Date().toString()
     };
     setNoticias((prevState) => ({ ...prevState, datos: [nuevaNoticia, ...datosNoticias.datos] }));
   };
@@ -40,13 +41,12 @@ const Noticias = () => {
     );
   };
 
-  const editNoticia = (titulo, texto, id, noticiaData) => {
-    const a = datosNoticias.datos.findIndex(({ _id }) => _id === id);
+  const editNoticia = (titulo, texto, id) => {
     setNoticias({ total: datosNoticias.total, datos: datosNoticias.datos.map(noticia => (noticia._id === id ? { ...noticia, titulo, texto } : noticia)) });
   };
 
   const editNoticiaHandler = async (titulo, texto, id) => {
-    sendNoticiaRequest(
+    editNoticiaRequest(
       {
         url: `https://digitalclub.herokuapp.com/noticias/${id}`,
         method: "PUT",
