@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import ClipLoader from "react-spinners/ClipLoader";
 import Noticia from "../../Components/Noticias/Noticia";
 import ContextoNoticias from "../../Contextos/ContextoNoticias";
 
@@ -22,7 +23,7 @@ const MostrarNoticias = () => {
           <ul>
             {datosNoticias.datos.map((noticia) => <Noticia key={noticia._id} noticia={noticia} />)}
           </ul>
-        ) : <p>cargando</p>}
+        ) : <ClipLoader color="#007bff" css={{ margin: "100px auto", display: "block" }} size={300} />}
     </section>
   );
 };
