@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import MostrarNoticias from "../paginas/Noticias/MostrarNoticias";
 import AddNoticia from "../paginas/Noticias/AddNoticia";
 import EditarNoticia from "../paginas/Noticias/EditarNoticia";
@@ -79,22 +79,20 @@ const Noticias = () => {
       datosNoticias, enterNoticiaHandler, editNoticiaHandler, eliminarNoticiaHandler
     }}
     >
-      <Router>
-        <Navbar />
-        <div className="container">
-          <Switch>
-            <Route path="/noticias" exact>
-              <MostrarNoticias />
-            </Route>
-            <Route path="/noticias/crear-noticia" exact>
-              <AddNoticia />
-            </Route>
-            <Route path="/noticias/editar-noticia/:id" exact>
-              <EditarNoticia />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+      <Navbar />
+      <div className="container">
+        <Switch>
+          <Route path="/noticias" exact>
+            <MostrarNoticias />
+          </Route>
+          <Route path="/noticias/crear-noticia" exact>
+            <AddNoticia />
+          </Route>
+          <Route path="/noticias/editar-noticia/:id" exact>
+            <EditarNoticia />
+          </Route>
+        </Switch>
+      </div>
     </ContextoNoticias.Provider>
   );
 };
