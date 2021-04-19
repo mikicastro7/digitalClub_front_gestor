@@ -11,6 +11,7 @@ import useHttp from "../hooks/useHttp";
 const Noticias = () => {
   const { datos: datosNoticias, pedirDatos: pedirNoticias, setDatos: setNoticias } = useFetch();
   const { sendRequest: sendNoticiaRequest } = useHttp();
+  const { sendRequest: editNoticiaRequest } = useHttp();
 
   useEffect(() => {
     pedirNoticias("https://digitalclub.herokuapp.com/noticias");
@@ -22,7 +23,7 @@ const Noticias = () => {
       texto,
       titulo
     };
-    setNoticias((prevState) => ({ ...prevState, datos: [...datosNoticias.datos, nuevaNoticia] }));
+    setNoticias((prevState) => ({ ...prevState, datos: [nuevaNoticia, ...datosNoticias.datos] }));
   };
 
   const enterNoticiaHandler = async (titulo, texto) => {
@@ -39,8 +40,27 @@ const Noticias = () => {
     );
   };
 
+  const editNoticia = (titulo, texto, id, noticiaData) => {
+    const a = datosNoticias.datos.findIndex(({ _id }) => _id === id);
+    setNoticias({ total: datosNoticias.total, datos: datosNoticias.datos.map(noticia => (noticia._id === id ? { ...noticia, titulo, texto } : noticia)) });
+  };
+
+  const editNoticiaHandler = async (titulo, texto, id) => {
+    sendNoticiaRequest(
+      {
+        url: `https://digitalclub.herokuapp.com/noticias/${id}`,
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: { texto, titulo },
+      },
+      editNoticia.bind(null, titulo, texto, id)
+    );
+  };
+
   return (
-    <ContextoNoticias.Provider value={{ datosNoticias, enterNoticiaHandler }}>
+    <ContextoNoticias.Provider value={{ datosNoticias, enterNoticiaHandler, editNoticiaHandler }}>
       <Router>
         <Navbar />
         <div className="container">
