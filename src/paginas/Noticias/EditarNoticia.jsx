@@ -11,7 +11,6 @@ const EditarNoticia = () => {
   useEffect(() => {
     pedirNoticia(`https://digitalclub.herokuapp.com/noticias/noticia/${id}`);
   }, [pedirNoticia]);
-  console.log(datosNoticia);
   return (
     <section>
       <h2>Editar</h2>
