@@ -216,6 +216,46 @@ section h1 {
   box-shadow: 10px 10px 10px rgb(177, 177, 177)
 }
 
+.tabla-personas {
+  width: 100%;
+  text-align: center;
+  margin: 20px auto;
+
+}
+
+.tabla-personas th {
+  border-bottom: 1px solid #aedff6;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 5px;
+  border-right: 1px solid #aedff6;
+}
+
+.tabla-personas td {
+  border-right: 1px solid #aedff6;
+  padding: 10px 5px;
+}
+
+.tabla-personas tr {
+  border-bottom: 1px solid #aedff6;
+}
+
+.tabla-personas th.ultima-fila {
+  border-right: none
+}
+
+.tabla-personas td.ultima-fila {
+  border-right: none;
+}
+
+.tabla-personas tr:last-child {
+  border-bottom: none;
+}
+
+.titulo-jugadores {
+  margin-top: 20px;
+}
+
 /*Media queries*/
 @media only screen and (min-width: 768px) {
   .noticia img {
@@ -252,11 +292,13 @@ section h1 {
   }
 }
 
-/*home page*/
-
 
 @media only screen and (min-width: 992px) {
   .crear-noticia-img {
     width: 70%;
+  }
+
+  .tabla-personas {
+    width: 80%
   }
 }
