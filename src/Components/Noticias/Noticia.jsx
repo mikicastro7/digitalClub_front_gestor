@@ -1,11 +1,9 @@
 import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Collapse } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import ModalEliminarNoticia from "./ModalEliminarNoticia";
 import ContextoNoticias from "../../Contextos/ContextoNoticias";
+import BotonesFuncionalidades from "../BotonesFuncionalidades";
 
 const Noticia = ({
   noticia: {
@@ -39,17 +37,7 @@ const Noticia = ({
       <ModalEliminarNoticia show={showModal} handleClose={handleClose} eliminarNoticiaOnClick={eliminarNoticiaOnClick} />
       <div className="row align-items-center">
         <h3 role="presentation" onKeyDown={noticiaDesplegarHandler} onClick={noticiaDesplegarHandler} style={{ cursor: "pointer" }} className="noticia-title col-12 col-lg-9 text-center text-md-center text-lg-left">{titulo}</h3>
-        <div className="noticia-functional-buttons col-12 col-lg-3 text-center text-md-center text-lg-right">
-          <button type="button">
-            <Link to={`/noticias/editar-noticia/${_id}`}><FontAwesomeIcon className="button-normal-colors" icon={faEdit} /></Link>
-          </button>
-          <button onClick={handleShow} type="button">
-            <FontAwesomeIcon className="button-normal-colors" icon={faTrashAlt} />
-          </button>
-          <button type="button" onClick={() => setOpen(!open)}>
-            <FontAwesomeIcon className="blue-colors" icon={faCaretDown} />
-          </button>
-        </div>
+        <BotonesFuncionalidades open={open} _id={_id} handleShow={handleShow} setOpen={setOpen} />
       </div>
       <Collapse in={open}>
         <ul className="noticia-content text-justify list-unstyled">
