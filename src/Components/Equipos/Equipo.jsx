@@ -35,7 +35,6 @@ const Equipo = ({
           {img && <img src={img.link} alt={img.alt} />}
           {jugadores.length !== 0 ? <Jugadores jugadores={jugadores} /> : ""}
           {staff.length !== 0 ? <Staff staff={staff} /> : ""}
-
           <p className="noticia-dates">
             <span>Creada el: </span>
             {createdAt && formatDate()}
