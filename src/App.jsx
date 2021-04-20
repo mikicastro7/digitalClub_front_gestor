@@ -10,6 +10,7 @@ import EditarNoticia from "./paginas/Noticias/EditarNoticia";
 import Equipos from "./paginas/Equipos";
 import PaginaPrincipalAuth from "./paginas/PaginaPrincipalAuth";
 import NotFoundPage from "./paginas/NotFoundPage";
+import ContextoEquiposProvider from "./Contextos/ContextoEquiposProvider";
 
 const App = () => (
 
@@ -17,29 +18,32 @@ const App = () => (
     <Navbar />
     <div className="container">
       <ContextoNoticiasProvider>
-        <Switch>
-          <Route path="/noticias" exact>
-            <MostrarNoticias />
-          </Route>
-          <Route path="/noticias/crear-noticia" exact>
-            <AddNoticia />
-          </Route>
-          <Route path="/noticias/editar-noticia/:id" exact>
-            <EditarNoticia />
-          </Route>
-          <Route path="/equipos" exact>
-            <Equipos />
-          </Route>
-          <Route path="/home" exact>
-            <PaginaPrincipalAuth />
-          </Route>
-          <Route path="/" exact>
-            <Redirect to="/home" />
-          </Route>
-          <Route path="*" exact>
-            <NotFoundPage />
-          </Route>
-        </Switch>
+        <ContextoEquiposProvider>
+          <Switch>
+            <Route path="/noticias" exact>
+              <MostrarNoticias />
+            </Route>
+            <Route path="/noticias/crear-noticia" exact>
+              <AddNoticia />
+            </Route>
+            <Route path="/noticias/editar-noticia/:id" exact>
+              <EditarNoticia />
+            </Route>
+
+            <Route path="/equipos" exact>
+              <Equipos />
+            </Route>
+            <Route path="/home" exact>
+              <PaginaPrincipalAuth />
+            </Route>
+            <Route path="/" exact>
+              <Redirect to="/home" />
+            </Route>
+            <Route path="*" exact>
+              <NotFoundPage />
+            </Route>
+          </Switch>
+        </ContextoEquiposProvider>
       </ContextoNoticiasProvider>
     </div>
   </Router>
