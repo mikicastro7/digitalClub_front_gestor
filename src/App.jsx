@@ -29,7 +29,6 @@ const App = () => (
             <Route path="/noticias/editar-noticia/:id" exact>
               <EditarNoticia />
             </Route>
-
             <Route path="/equipos" exact>
               <Equipos />
             </Route>
