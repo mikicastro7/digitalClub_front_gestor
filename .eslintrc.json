@@ -39,6 +39,7 @@
     "space-before-function-paren": "off",
     "no-param-reassign": "off",
     "no-restricted-globals": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "linebreak-style": 0
     }
 }
