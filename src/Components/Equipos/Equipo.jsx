@@ -10,6 +10,7 @@ const Equipo = ({
     _id, img, nombre, jugadores, staff, created_at: createdAt
   }
 }) => {
+  console.log(jugadores);
   const [open, setOpen] = useState(false);
   const noticiaDesplegarHandler = () => {
     setOpen(!open);
@@ -32,8 +33,9 @@ const Equipo = ({
       <Collapse in={open}>
         <ul className="noticia-content text-justify list-unstyled">
           {img && <img src={img.link} alt={img.alt} />}
-          <Jugadores jugadores={jugadores} />
-          <Staff staff={staff} />
+          {jugadores.length !== 0 ? <Jugadores jugadores={jugadores} /> : ""}
+          {staff.length !== 0 ? <Staff staff={staff} /> : ""}
+
           <p className="noticia-dates">
             <span>Creada el: </span>
             {createdAt && formatDate()}
