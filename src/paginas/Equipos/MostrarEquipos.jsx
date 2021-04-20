@@ -3,8 +3,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import ContextoEquipos from "../Contextos/ContextoEquipos";
-import Equipo from "../Components/Equipos/Equipo";
+import ContextoEquipos from "../../Contextos/ContextoEquipos";
+import Equipo from "../../Components/Equipos/Equipo";
 
 const Equipos = () => {
   const { datosEquipos } = useContext(ContextoEquipos);

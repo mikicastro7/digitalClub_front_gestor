@@ -7,7 +7,8 @@ import Navbar from "./Components/UIcomponents/Navbar";
 import MostrarNoticias from "./paginas/Noticias/MostrarNoticias";
 import AddNoticia from "./paginas/Noticias/AddNoticia";
 import EditarNoticia from "./paginas/Noticias/EditarNoticia";
-import Equipos from "./paginas/Equipos";
+import Equipos from "./paginas/Equipos/MostrarEquipos";
+import AddEquip from "./paginas/Equipos/AddEquipo";
 import PaginaPrincipalAuth from "./paginas/PaginaPrincipalAuth";
 import NotFoundPage from "./paginas/NotFoundPage";
 import ContextoEquiposProvider from "./Contextos/ContextoEquiposProvider";
@@ -31,6 +32,9 @@ const App = () => (
             </Route>
             <Route path="/equipos" exact>
               <Equipos />
+            </Route>
+            <Route path="/equipos/crear-equipo" exact>
+              <AddEquip />
             </Route>
             <Route path="/home" exact>
               <PaginaPrincipalAuth />
