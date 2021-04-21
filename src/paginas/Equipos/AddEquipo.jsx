@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-closing-tag-location */
 import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -5,47 +6,39 @@ import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import uuid from "react-uuid";
 
 const AddEquipo = () => {
-  const [jugadors, setJugadors] = ([{
+  const [jugadores, setJugadores] = useState([{
     id: uuid(),
-    campos: [
-      {
-        nombre: {
-          value: "",
-          required: true,
-        },
-        dorsal: "",
-        nacimiento: "",
-        rol: ""
-      }]
+    nombre: "",
+    dorsal: "",
+    nacimiento: "",
+    rol: ""
+  }]);
 
-  },
-  {
-    id: uuid(),
-    campos: [
-      {
-        nombre: {
-          value: "",
-          required: true,
-        },
-        dorsal: "",
-        nacimiento: "",
-        rol: ""
-      }]
-  }
-  ]);
-
-  const generarInputsJugador = () => {
-    const inputs = jugadors.map(jugador => jugador.campos.map(campo => {
-      const arrayInputs = [];
-      arrayInputs.push(<input type="text" />);
-      return arrayInputs;
-    }));
-    return inputs;
+  const changeCampoHandler = (e, id, campo) => {
+    setJugadores(jugadores.map(jugador => ((jugador.id === id) ? { ...jugador, [campo]: e.target.value } : jugador)));
+    checkAddJugador();
   };
+
+  const checkAddJugador = () => {
+    const ultimoJugador = jugadores[jugadores.length - 1];
+    if (ultimoJugador.nombre.trim() !== "" && ultimoJugador.dorsal.trim() !== "" && ultimoJugador.nacimiento.trim() !== "" && ultimoJugador.rol.trim() !== "") {
+      addFilaJugador();
+    }
+  };
+
+  const addFilaJugador = () => {
+    setJugadores([...jugadores, {
+      id: uuid(),
+      nombre: "",
+      dorsal: "",
+      nacimiento: "",
+      rol: ""
+    }]);
+  };
+
   return (
     <section>
       <h2>Crear equipos</h2>
-
       <form className="form-crear-noticia">
         <TextareaAutosize name="titulo" className="input-noticia input-titular-noticia" placeholder="Nombre del equipo" />
         <label className="label-img-noticia" htmlFor="imagen">
@@ -68,13 +61,17 @@ const AddEquipo = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><input type="text" /></td>
-              <td><input type="text" /></td>
-              <td><input type="text" /></td>
-              <td className="ultima-fila"><input type="text" /></td>
-            </tr>
-            {generarInputsJugador()}
+            {
+              jugadores.map(jugador => (
+                <tr key={jugador.id}>
+                  <td><input onChange={(e) => changeCampoHandler(e, jugador.id, "dorsal")} value={jugador.dorsal} type="text" /></td>
+                  <td><input onChange={(e) => changeCampoHandler(e, jugador.id, "nombre")} value={jugador.nombre} type="text" /></td>
+                  <td><input onChange={(e) => changeCampoHandler(e, jugador.id, "nacimiento")} value={jugador.nacimiento} type="text" /></td>
+                  <td><input onChange={(e) => changeCampoHandler(e, jugador.id, "rol")} value={jugador.rol} type="text" /></td>
+                  <td className="ultima-fila"><button type="button">X</button></td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </form>
