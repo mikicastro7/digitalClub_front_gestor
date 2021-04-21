@@ -49,7 +49,7 @@ const AddEquipo = () => {
         </label>
         <input className="input-img-noticia" id="imagen" name="imagen" accept="image/png,image/jpeg" type="file" />
         <TextareaAutosize name="alt" className="input-noticia" placeholder="pequeña descripcion de la foto ej: niño montado a caballo" />
-        <button type="submit" className="btn btn-primary">Crear equipo </button>
+        <h4>Jugadores</h4>
         <table className="tabla-personas">
           <thead>
             <tr>
@@ -74,6 +74,7 @@ const AddEquipo = () => {
             }
           </tbody>
         </table>
+        <button type="submit" className="btn btn-primary">Crear equipo </button>
       </form>
     </section>
   );

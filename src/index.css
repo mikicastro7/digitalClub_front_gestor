@@ -256,6 +256,15 @@ section h1 {
   margin-top: 20px;
 }
 
+.tabla-personas input {
+  border: none;
+}
+
+.tabla-personas input:focus {
+  outline: none;
+  border-bottom: 1px solid #007bff;
+}
+
 /*Media queries*/
 @media only screen and (min-width: 768px) {
   .noticia img {
