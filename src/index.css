@@ -265,6 +265,22 @@ section h1 {
   border-bottom: 1px solid #007bff;
 }
 
+.tabla-personas button {
+  background-color: white;
+  border: none;
+  color: #aedff6;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.tabla-personas button:hover {
+  color: #007bff
+}
+
+.tabla-personas button:focus {
+  outline: 1px solid #007bff;
+}
+
 /*Media queries*/
 @media only screen and (min-width: 768px) {
   .noticia img {
