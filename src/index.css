@@ -258,6 +258,9 @@ section h1 {
 
 .tabla-personas input {
   border: none;
+  text-align: center;
+  border-bottom: 1px solid white;
+  width: 100%;
 }
 
 .tabla-personas input:focus {
@@ -324,6 +327,6 @@ section h1 {
   }
 
   .tabla-personas {
-    width: 80%
+    width: 90%
   }
 }

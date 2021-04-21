@@ -4,17 +4,48 @@ import TextareaAutosize from "react-textarea-autosize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import uuid from "react-uuid";
+import TablaJugadores from "../../Components/Equipos/TablaJugadoresCrear";
+import TablaStaff from "../../Components/Equipos/TablaStaffCrear";
 
 const AddEquipo = () => {
   const [jugadores, setJugadores] = useState([{
-    id: uuid(),
+    id: `uuid_${uuid()}`,
     nombre: "",
     dorsal: "",
     nacimiento: "",
     rol: ""
   }]);
 
-  const changeCampoHandler = (e, id, campo) => {
+  const [staff, setStaff] = useState([{
+    id: `uuid_${uuid()}`,
+    nombre: "",
+    nacimiento: "",
+    rol: ""
+  }]);
+  console.log(staff);
+
+  const changeCampoStaffHandler = (e, id, campo) => {
+    setStaff(staff.map(miembroStaff => ((miembroStaff.id === id) ? { ...miembroStaff, [campo]: e.target.value } : miembroStaff)));
+    checkAddMiembroStaff();
+  };
+
+  const checkAddMiembroStaff = () => {
+    const ultimoMiembro = staff[staff.length - 1];
+    if (ultimoMiembro.nombre.trim() !== "" && ultimoMiembro.nacimiento.trim() !== "" && ultimoMiembro.rol.trim() !== "") {
+      addFilaStaff();
+    }
+  };
+
+  const addFilaStaff = () => {
+    setStaff([...staff, {
+      id: `uuid_${uuid()}`,
+      nombre: "",
+      nacimiento: "",
+      rol: ""
+    }]);
+  };
+
+  const changeCampoJugadorHandler = (e, id, campo) => {
     setJugadores(jugadores.map(jugador => ((jugador.id === id) ? { ...jugador, [campo]: e.target.value } : jugador)));
     checkAddJugador();
   };
@@ -28,12 +59,20 @@ const AddEquipo = () => {
 
   const addFilaJugador = () => {
     setJugadores([...jugadores, {
-      id: uuid(),
+      id: `uuid_${uuid()}`,
       nombre: "",
       dorsal: "",
       nacimiento: "",
       rol: ""
     }]);
+  };
+
+  const deleteFilaJugadorHandler = (id) => {
+    setJugadores(jugadores.filter(jugador => jugador.id !== id));
+  };
+
+  const deleteFilaStaffHandler = (id) => {
+    setStaff(staff.filter(miembro => miembro.id !== id));
   };
 
   return (
@@ -43,37 +82,14 @@ const AddEquipo = () => {
         <TextareaAutosize name="titulo" className="input-noticia input-titular-noticia" placeholder="Nombre del equipo" />
         <label className="label-img-noticia" htmlFor="imagen">
           {" "}
-          :
-          {" "}
           <span><FontAwesomeIcon icon={faUpload} /></span>
         </label>
         <input className="input-img-noticia" id="imagen" name="imagen" accept="image/png,image/jpeg" type="file" />
         <TextareaAutosize name="alt" className="input-noticia" placeholder="pequeña descripcion de la foto ej: niño montado a caballo" />
         <h4>Jugadores</h4>
-        <table className="tabla-personas">
-          <thead>
-            <tr>
-              <th>Dorsal</th>
-              <th>Nombre</th>
-              <th>Fecha de Nacimiento</th>
-              <th>Rol</th>
-              <th className="ultima-fila">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              jugadores.map(jugador => (
-                <tr key={jugador.id}>
-                  <td><input onChange={(e) => changeCampoHandler(e, jugador.id, "dorsal")} value={jugador.dorsal} type="text" /></td>
-                  <td><input onChange={(e) => changeCampoHandler(e, jugador.id, "nombre")} value={jugador.nombre} type="text" /></td>
-                  <td><input onChange={(e) => changeCampoHandler(e, jugador.id, "nacimiento")} value={jugador.nacimiento} type="text" /></td>
-                  <td><input onChange={(e) => changeCampoHandler(e, jugador.id, "rol")} value={jugador.rol} type="text" /></td>
-                  <td className="ultima-fila"><button type="button">X</button></td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+        <TablaJugadores deleteFilaJugadorHandler={deleteFilaJugadorHandler} jugadores={jugadores} changeCampoJugadorHandler={changeCampoJugadorHandler} />
+        <h4>Staff</h4>
+        <TablaStaff deleteFilaStaffHandler={deleteFilaStaffHandler} staff={staff} changeCampoStaffHandler={changeCampoStaffHandler} />
         <button type="submit" className="btn btn-primary">Crear equipo </button>
       </form>
     </section>
