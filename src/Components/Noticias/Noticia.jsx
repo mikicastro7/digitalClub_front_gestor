@@ -58,8 +58,8 @@ Noticia.propTypes = {
   noticia: PropTypes.shape({
     titulo: PropTypes.string.isRequired,
     img: PropTypes.shape({
-      link: PropTypes.string.isRequired,
-      alt: PropTypes.string.isRequired
+      link: PropTypes.string,
+      alt: PropTypes.string
     }),
     created_at: PropTypes.string.isRequired,
     _id: PropTypes.string.isRequired,

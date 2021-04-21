@@ -28,7 +28,7 @@ const Equipo = ({
     <li className="noticia list-unstyled">
       <div className="row align-items-center">
         <h3 role="presentation" onKeyDown={noticiaDesplegarHandler} onClick={noticiaDesplegarHandler} style={{ cursor: "pointer" }} className="noticia-title col-12 col-lg-9 text-center text-md-center text-lg-left">{nombre}</h3>
-        <BotonesFuncionalidades open={open} _id={_id} handleShow={handleShow} setOpen={setOpen} />
+        <BotonesFuncionalidades tipo="equipo" open={open} _id={_id} handleShow={handleShow} setOpen={setOpen} />
       </div>
       <Collapse in={open}>
         <ul className="noticia-content text-justify list-unstyled">
