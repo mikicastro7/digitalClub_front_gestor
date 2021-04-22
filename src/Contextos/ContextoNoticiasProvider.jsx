@@ -16,28 +16,36 @@ const ContextoNoticiasProvider = (props) => {
     pedirNoticias("https://digitalclub.herokuapp.com/noticias");
   }, [pedirNoticias]);
 
-  const addNoticia = (titulo, texto, noticiaData) => {
+  const addNoticia = (titulo, texto, alt, noticiaData) => {
     toast("Noticia creada");
     const nuevaNoticia = {
-      _id: noticiaData.id,
+      _id: noticiaData.respuesta._id,
       texto,
       titulo,
+      img: {
+        link: noticiaData.respuesta.img.link,
+        alt
+      },
       created_at: new Date().toString()
     };
     setNoticias((prevState) => ({ ...prevState, datos: [nuevaNoticia, ...datosNoticias.datos] }));
   };
 
-  const enterNoticiaHandler = async (titulo, texto) => {
+  const enterNoticiaHandler = async (titulo, texto, foto, alt) => {
+    const datos = new FormData();
+    console.log(titulo);
+    datos.append("foto", foto);
+    datos.append("titulo", titulo);
+    datos.append("texto", texto);
+    datos.append("alt", alt);
+
     sendNoticiaRequest(
       {
         url: "https://digitalclub.herokuapp.com/noticias",
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: { texto, titulo },
+        body: datos,
       },
-      addNoticia.bind(null, titulo, texto)
+      addNoticia.bind(null, titulo, texto, alt)
     );
   };
 

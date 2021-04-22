@@ -48,7 +48,7 @@ const NoticiaForm = (props) => {
     e.preventDefault();
     if (formIsValid) {
       setRedirect(true);
-      formAction(formDatos.titulo, formDatos.text, id);
+      formAction(formDatos.titulo, formDatos.text, imgFile, formDatos.alt, id);
     }
   };
 
@@ -63,7 +63,7 @@ const NoticiaForm = (props) => {
               {img ? <img className="crear-noticia-img" src={img} alt="" /> : <span><FontAwesomeIcon icon={faUpload} /></span>}
             </label>
             <input onChange={(e) => changeImgHandler(e)} className="input-img-noticia" id="imagen" name="imagen" accept="image/png,image/jpeg" type="file" />
-            <TextareaAutosize disabled={img === ""} name="alt" className="input-noticia" placeholder="pequeña descripcion de la foto ej: niño montado a caballo" />
+            <TextareaAutosize value={formDatos.alt} onChange={modificarDatos} disabled={img === ""} name="alt" className="input-noticia" placeholder="pequeña descripcion de la foto ej: niño montado a caballo" />
             <button type="submit" className="btn btn-primary">
               {tipo === "Edit" ? "Editar " : "Publicar "}
               noticia
