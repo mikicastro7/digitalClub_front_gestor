@@ -50,7 +50,7 @@ const EquipoForm = ({ formAction }) => {
       history.push("/equipos");
     }
     if (!enteredTitleIsValid) {
-      toast.error("El camp titulo es obligatorio");
+      toast.error("El camp nombre es obligatorio");
     }
     if (!enteredAltIsValid) {
       toast.error("Pon una pequeña descripcion de la imagen más de 5 caracteeres");
