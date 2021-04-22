@@ -43,7 +43,6 @@ const ContextoNoticiasProvider = (props) => {
 
   const enterNoticiaHandler = async (titulo, texto, foto, alt) => {
     const datos = new FormData();
-    console.log(titulo);
     datos.append("foto", foto);
     datos.append("titulo", titulo);
     datos.append("texto", texto);
@@ -59,22 +58,38 @@ const ContextoNoticiasProvider = (props) => {
     );
   };
 
-  const editNoticia = (titulo, texto, id) => {
+  const editNoticia = (titulo, texto, id, alt = "una imagen", datosNoticia) => {
+    console.log(datosNoticia);
     toast("Noticia editada");
-    setNoticias({ total: datosNoticias.total, datos: datosNoticias.datos.map(noticia => (noticia._id === id ? { ...noticia, titulo, texto } : noticia)) });
+    let noticiaEditada = {};
+    if (datosNoticia.img) {
+      noticiaEditada = {
+        titulo,
+        texto,
+        _id: id,
+        img: {
+          link: datosNoticia.img.link,
+          alt
+        },
+      };
+    }
+    setNoticias({ total: datosNoticias.total, datos: datosNoticias.datos.map(noticia => (noticia._id === id ? noticiaEditada : noticia)) });
   };
 
-  const editNoticiaHandler = async (titulo, texto, id) => {
+  const editNoticiaHandler = async (titulo, texto, foto, alt, id) => {
+    const datos = new FormData();
+    datos.append("foto", foto);
+    datos.append("titulo", titulo);
+    datos.append("texto", texto);
+    datos.append("alt", alt);
+
     editNoticiaRequest(
       {
         url: `https://digitalclub.herokuapp.com/noticias/${id}`,
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: { texto, titulo },
+        body: datos,
       },
-      editNoticia.bind(null, titulo, texto, id)
+      editNoticia.bind(null, titulo, texto, id, alt)
     );
   };
 
