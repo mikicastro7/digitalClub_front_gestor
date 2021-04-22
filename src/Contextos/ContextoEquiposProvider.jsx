@@ -9,6 +9,7 @@ const ContextoEquiposProvider = (props) => {
   const { children } = props;
   const { datos: datosEquipos, pedirDatos: pedirEquipos, setDatos: setEquipos } = useFetch();
   const { sendRequest: sendEquipoRequest } = useHttp();
+  const { sendRequest: eliminarEquipoRequest } = useHttp();
 
   useEffect(() => {
     pedirEquipos("https://digitalclub.herokuapp.com/equipos");
@@ -87,9 +88,24 @@ const ContextoEquiposProvider = (props) => {
     );
   };
 
+  const eliminarEquipo = (id) => {
+    toast("Equipo eliminado");
+    setEquipos({ total: datosEquipos.total, datos: datosEquipos.datos.filter(equipo => equipo._id !== id) });
+  };
+
+  const eliminarEquipoHandler = (id) => {
+    eliminarEquipoRequest(
+      {
+        url: `https://digitalclub.herokuapp.com/equipos/${id}`,
+        method: "DELETE"
+      },
+      eliminarEquipo.bind(null, id)
+    );
+  };
+
   return (
     <ContextoEquipos.Provider value={{
-      datosEquipos, enterEquipoHandler
+      datosEquipos, enterEquipoHandler, eliminarEquipoHandler
     }}
     >
       { children}
