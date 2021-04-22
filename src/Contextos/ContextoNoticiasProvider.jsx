@@ -12,10 +12,6 @@ const ContextoNoticiasProvider = (props) => {
   const { sendRequest: editNoticiaRequest } = useHttp();
   const { sendRequest: eliminarNoticiaRequest } = useHttp();
 
-  useEffect(() => {
-    pedirNoticias("https://digitalclub.herokuapp.com/noticias");
-  }, [pedirNoticias]);
-
   const addNoticia = (titulo, texto, alt, noticiaData) => {
     toast("Noticia creada");
     let nuevaNoticia = {};
