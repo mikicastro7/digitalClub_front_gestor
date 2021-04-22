@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 import useForm from "../../hooks/useForm";
 
 const NoticiaForm = (props) => {
@@ -49,6 +50,12 @@ const NoticiaForm = (props) => {
     if (formIsValid) {
       setRedirect(true);
       formAction(formDatos.titulo, formDatos.text, imgFile, formDatos.alt, id);
+    }
+    if (!enteredTitleIsValid) {
+      toast.error("El camp titulo es obligatorio");
+    }
+    if (!enteredAltIsValid) {
+      toast.error("Pon una pequeña descripcion de la imagen más de 5 caracteeres");
     }
   };
 

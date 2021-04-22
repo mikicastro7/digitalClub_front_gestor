@@ -7,10 +7,13 @@ import ContextoNoticias from "./ContextoNoticias";
 const ContextoNoticiasProvider = (props) => {
   // eslint-disable-next-line react/prop-types
   const { children } = props;
-  const { datos: datosNoticias, pedirDatos: pedirNoticias, setDatos: setNoticias } = useFetch();
   const { sendRequest: sendNoticiaRequest } = useHttp();
   const { sendRequest: editNoticiaRequest } = useHttp();
   const { sendRequest: eliminarNoticiaRequest } = useHttp();
+  const { datos: datosNoticias, pedirDatos: pedirNoticias, setDatos: setNoticias } = useFetch();
+  useEffect(() => {
+    pedirNoticias("https://digitalclub.herokuapp.com/noticias");
+  }, [pedirNoticias]);
 
   const addNoticia = (titulo, texto, alt, noticiaData) => {
     toast("Noticia creada");
@@ -54,22 +57,35 @@ const ContextoNoticiasProvider = (props) => {
     );
   };
 
-  const editNoticia = (titulo, texto, id, alt = "una imagen", datosNoticia) => {
-    console.log(datosNoticia);
-    toast("Noticia editada");
-    let noticiaEditada = {};
-    if (datosNoticia.img) {
-      noticiaEditada = {
-        titulo,
-        texto,
-        _id: id,
-        img: {
-          link: datosNoticia.img.link,
-          alt
-        },
+  const editNoticia = (titulo, texto, id, alt = "una imagen", foto, datosNoticia) => {
+    if (foto) {
+      const file = foto;
+      const reader = new FileReader();
+      reader.onloadend = function () {
+        toast("Noticia editada");
+        let imagen = {};
+        if (datosNoticia.img) {
+          imagen = {
+            link: reader.result,
+            alt
+          };
+        }
+        setNoticias({
+          total: datosNoticias.total,
+          datos: datosNoticias.datos.map(noticia => (noticia._id === id ? {
+            ...noticia, img: imagen, titulo, texto
+          } : noticia))
+        });
       };
+      reader.readAsDataURL(file);
+    } else {
+      setNoticias({
+        total: datosNoticias.total,
+        datos: datosNoticias.datos.map(noticia => (noticia._id === id ? {
+          ...noticia, titulo, texto
+        } : noticia))
+      });
     }
-    setNoticias({ total: datosNoticias.total, datos: datosNoticias.datos.map(noticia => (noticia._id === id ? noticiaEditada : noticia)) });
   };
 
   const editNoticiaHandler = async (titulo, texto, foto, alt, id) => {
@@ -85,7 +101,7 @@ const ContextoNoticiasProvider = (props) => {
         method: "PUT",
         body: datos,
       },
-      editNoticia.bind(null, titulo, texto, id, alt)
+      editNoticia.bind(null, titulo, texto, id, alt, foto)
     );
   };
 
