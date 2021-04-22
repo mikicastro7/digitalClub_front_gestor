@@ -10,7 +10,6 @@ const Equipo = ({
     _id, img, nombre, jugadores, staff, created_at: createdAt
   }
 }) => {
-  console.log(jugadores);
   const [open, setOpen] = useState(false);
   const noticiaDesplegarHandler = () => {
     setOpen(!open);
