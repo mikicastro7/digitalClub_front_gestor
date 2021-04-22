@@ -18,16 +18,26 @@ const ContextoNoticiasProvider = (props) => {
 
   const addNoticia = (titulo, texto, alt, noticiaData) => {
     toast("Noticia creada");
-    const nuevaNoticia = {
-      _id: noticiaData.respuesta._id,
-      texto,
-      titulo,
-      img: {
-        link: noticiaData.respuesta.img.link,
-        alt
-      },
-      created_at: new Date().toString()
-    };
+    let nuevaNoticia = {};
+    if (alt) {
+      nuevaNoticia = {
+        _id: noticiaData.respuesta._id,
+        texto,
+        titulo,
+        img: {
+          link: noticiaData.respuesta.img.link,
+          alt
+        },
+        created_at: new Date().toString()
+      };
+    } else {
+      nuevaNoticia = {
+        _id: noticiaData.respuesta._id,
+        texto,
+        titulo,
+        created_at: new Date().toString()
+      };
+    }
     setNoticias((prevState) => ({ ...prevState, datos: [nuevaNoticia, ...datosNoticias.datos] }));
   };
 
