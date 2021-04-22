@@ -58,11 +58,11 @@ const ContextoNoticiasProvider = (props) => {
   };
 
   const editNoticia = (titulo, texto, id, alt = "una imagen", foto, datosNoticia) => {
+    toast("Noticia editada");
     if (foto) {
       const file = foto;
       const reader = new FileReader();
       reader.onloadend = function () {
-        toast("Noticia editada");
         let imagen = {};
         if (datosNoticia.img) {
           imagen = {
