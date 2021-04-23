@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
@@ -10,16 +11,28 @@ import TablaJugadores from "./TablaJugadoresCrear";
 import TablaStaff from "./TablaStaffCrear";
 import useForm from "../../hooks/useForm";
 
-const EquipoForm = ({ formAction }) => {
+const EquipoForm = (props) => {
+  const {
+    datosEquipo: {
+      _id, nombre: nombreProp, img: imgProps, jugadores: jugadoresProp = [], staff: staffProp = []
+    } = {}, tipo, formAction
+  } = props;
   const history = useHistory();
-  const [redirect, setRedirect] = useState(false);
   const [img, setImg] = useState("");
   const [imgFile, setImgFile] = useState("");
 
   const { formDatos, modificarDatos } = useForm({
-    titulo: "",
-    alt: ""
+    titulo: nombreProp || "",
+    alt: imgProps ? imgProps.alt : ""
   });
+
+  let jugadoresMostrar = [];
+  if (jugadoresProp) {
+    jugadoresMostrar = jugadoresProp.map(jugador => ({
+      ...jugador,
+      fecha_nacimiento: jugador.fecha_nacimiento.split("/").reverse().join("-")
+    }));
+  }
 
   const enteredTitleIsValid = formDatos.titulo.trim() !== "";
   const enteredAltIsValid = formDatos.alt.trim().length > 5 || img === "";
@@ -57,72 +70,78 @@ const EquipoForm = ({ formAction }) => {
     }
   };
 
-  const [jugadores, setJugadores] = useState([{
-    id: `uuid_${uuid()}`,
-    nombre: "",
-    dorsal: "",
-    nacimiento: "",
-    rol: ""
-  }]);
+  const [jugadores, setJugadores] = useState([
+    ...jugadoresMostrar,
+    {
+      _id: `uuid_${uuid()}`,
+      nombre: "",
+      dorsal: "",
+      fecha_nacimiento: "",
+      rol: ""
+    }
+  ]);
 
-  const [staff, setStaff] = useState([{
-    id: `uuid_${uuid()}`,
-    nombre: "",
-    nacimiento: "",
-    rol: ""
-  }]);
+  console.log(jugadoresMostrar);
+
+  const [staff, setStaff] = useState(staffProp ? [
+    ...staffProp, {
+      _id: `uuid_${uuid()}`,
+      nombre: "",
+      fecha_nacimiento: "",
+      rol: ""
+    }] : staffProp);
 
   const changeCampoStaffHandler = (e, id, campo) => {
-    const staffModificado = staff.map(miembroStaff => ((miembroStaff.id === id) ? { ...miembroStaff, [campo]: e.target.value } : miembroStaff));
+    const staffModificado = staff.map(miembroStaff => ((miembroStaff._id === id) ? { ...miembroStaff, [campo]: e.target.value } : miembroStaff));
     setStaff(staffModificado);
     checkAddMiembroStaff(staffModificado);
   };
 
   const checkAddMiembroStaff = (staffModificado) => {
     const ultimoMiembro = staff[staff.length - 1];
-    if (ultimoMiembro.nombre.trim() !== "" && ultimoMiembro.nacimiento.trim() !== "" && ultimoMiembro.rol.trim() !== "") {
+    if (ultimoMiembro.nombre.trim() !== "" && ultimoMiembro.fecha_nacimiento.trim() !== "" && ultimoMiembro.rol.trim() !== "") {
       addFilaStaff(staffModificado);
     }
   };
 
   const addFilaStaff = (staffModificado) => {
     setStaff([...staffModificado, {
-      id: `uuid_${uuid()}`,
+      _id: `uuid_${uuid()}`,
       nombre: "",
-      nacimiento: "",
+      fecha_nacimiento: "",
       rol: ""
     }]);
   };
 
   const changeCampoJugadorHandler = (e, id, campo) => {
-    const jugadorModificado = jugadores.map(jugador => ((jugador.id === id) ? { ...jugador, [campo]: e.target.value } : jugador));
+    const jugadorModificado = jugadores.map(jugador => ((jugador._id === id) ? { ...jugador, [campo]: e.target.value } : jugador));
     setJugadores(jugadorModificado);
     checkAddJugador(jugadorModificado);
   };
 
   const checkAddJugador = (jugadoresModificados) => {
     const ultimoJugador = jugadores[jugadores.length - 1];
-    if (ultimoJugador.nombre.trim() !== "" && ultimoJugador.dorsal.trim() !== "" && ultimoJugador.nacimiento.trim() !== "" && ultimoJugador.rol.trim() !== "") {
+    if (ultimoJugador.nombre.trim() !== "" && ultimoJugador.dorsal.trim() !== "" && ultimoJugador.fecha_nacimiento.trim() !== "" && ultimoJugador.rol.trim() !== "") {
       addFilaJugador(jugadoresModificados);
     }
   };
 
   const addFilaJugador = (jugadoresModificados) => {
     setJugadores([...jugadoresModificados, {
-      id: `uuid_${uuid()}`,
+      _id: `uuid_${uuid()}`,
       nombre: "",
       dorsal: "",
-      nacimiento: "",
+      fecha_nacimiento: "",
       rol: ""
     }]);
   };
 
   const deleteFilaJugadorHandler = (id) => {
-    setJugadores(jugadores.filter(jugador => jugador.id !== id));
+    setJugadores(jugadores.filter(jugador => jugador._id !== id));
   };
 
   const deleteFilaStaffHandler = (id) => {
-    setStaff(staff.filter(miembro => miembro.id !== id));
+    setStaff(staff.filter(miembro => miembro._id !== id));
   };
 
   return (

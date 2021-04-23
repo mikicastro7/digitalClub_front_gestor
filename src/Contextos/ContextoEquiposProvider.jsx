@@ -77,6 +77,7 @@ const ContextoEquiposProvider = (props) => {
     if (staffNuevo.length) {
       datos.append("staff", staffString);
     }
+    console.log(jugadores);
 
     sendEquipoRequest(
       {
@@ -86,6 +87,17 @@ const ContextoEquiposProvider = (props) => {
       },
       addEquipo.bind(null, nombre, alt, jugadoresNuevo, staffNuevo)
     );
+  };
+
+  const modificarEquipoHandler = async (nombre, foto, alt, jugadores, staff) => {
+    const jugadoresNuevo = [...jugadores];
+    jugadoresNuevo.splice(jugadores.length - 1, 1);
+    console.log(jugadoresNuevo);
+    const jugadoresString = JSON.stringify(jugadoresNuevo);
+    const staffNuevo = [...staff];
+    staffNuevo.splice(staff.length - 1, 1);
+    console.log(staffNuevo);
+    const staffString = JSON.stringify(staffNuevo);
   };
 
   const eliminarEquipo = (id) => {
@@ -105,7 +117,7 @@ const ContextoEquiposProvider = (props) => {
 
   return (
     <ContextoEquipos.Provider value={{
-      datosEquipos, enterEquipoHandler, eliminarEquipoHandler
+      datosEquipos, enterEquipoHandler, eliminarEquipoHandler, modificarEquipoHandler
     }}
     >
       { children}

@@ -16,17 +16,16 @@ const TablaJugadoresCrear = ({ jugadores, changeCampoJugadorHandler, deleteFilaJ
       {
         // eslint-disable-next-line react/prop-types
         jugadores.map(jugador => (
-          <tr key={jugador.id}>
-            <td><input onChange={(e) => changeCampoJugadorHandler(e, jugador.id, "dorsal")} value={jugador.dorsal} type="text" /></td>
-            <td><input onChange={(e) => changeCampoJugadorHandler(e, jugador.id, "nombre")} value={jugador.nombre} type="text" /></td>
-            <td><input onChange={(e) => changeCampoJugadorHandler(e, jugador.id, "nacimiento")} value={jugador.nacimiento} type="date" /></td>
-            <td><input onChange={(e) => changeCampoJugadorHandler(e, jugador.id, "rol")} value={jugador.rol} type="text" /></td>
-            <td className="ultima-fila"><button tabIndex="-1" onClick={() => deleteFilaJugadorHandler(jugador.id)} type="button">X</button></td>
+          <tr key={jugador._id}>
+            <td><input onChange={(e) => changeCampoJugadorHandler(e, jugador._id, "dorsal")} value={jugador.dorsal} type="text" /></td>
+            <td><input onChange={(e) => changeCampoJugadorHandler(e, jugador._id, "nombre")} value={jugador.nombre} type="text" /></td>
+            <td><input onChange={(e) => changeCampoJugadorHandler(e, jugador._id, "fecha_nacimiento")} value={jugador.fecha_nacimiento} type="date" /></td>
+            <td><input onChange={(e) => changeCampoJugadorHandler(e, jugador._id, "rol")} value={jugador.rol} type="text" /></td>
+            <td className="ultima-fila"><button tabIndex="-1" onClick={() => deleteFilaJugadorHandler(jugador._id)} type="button">X</button></td>
           </tr>
         ))
       }
     </tbody>
   </table>
 );
-
 export default TablaJugadoresCrear;
