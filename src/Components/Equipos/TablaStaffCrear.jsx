@@ -17,7 +17,7 @@ const TablaStaffCrear = ({ staff, changeCampoStaffHandler, deleteFilaStaffHandle
         staff.map(miembro => (
           <tr key={miembro._id}>
             <td><input onChange={(e) => changeCampoStaffHandler(e, miembro._id, "nombre")} value={miembro.nombre} type="text" /></td>
-            <td><input type="date" onChange={(e) => changeCampoStaffHandler(e, miembro._id, "nacimiento")} value={miembro.nacimiento} /></td>
+            <td><input type="date" onChange={(e) => changeCampoStaffHandler(e, miembro._id, "fecha_nacimiento")} value={miembro.fecha_nacimiento} /></td>
             <td><input onChange={(e) => changeCampoStaffHandler(e, miembro._id, "rol")} value={miembro.rol} type="text" /></td>
             <td className="ultima-fila"><button tabIndex="-1" onClick={() => deleteFilaStaffHandler(miembro._id)} type="button">X</button></td>
           </tr>

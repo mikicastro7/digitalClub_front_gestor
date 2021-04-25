@@ -9,7 +9,7 @@ const Jugador = ({
   <tr>
     <td>{dorsal}</td>
     <td>{nombre}</td>
-    <td>12/3/2000</td>
+    <td>{nacimiento.split("-").reverse().join("/")}</td>
     <td className="ultima-fila">{rol}</td>
   </tr>
 );

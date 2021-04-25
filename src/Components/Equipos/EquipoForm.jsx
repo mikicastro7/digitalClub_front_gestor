@@ -18,7 +18,7 @@ const EquipoForm = (props) => {
     } = {}, tipo, formAction
   } = props;
   const history = useHistory();
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState(imgProps ? imgProps.link : "");
   const [imgFile, setImgFile] = useState("");
 
   const { formDatos, modificarDatos } = useForm({
@@ -34,6 +34,13 @@ const EquipoForm = (props) => {
     }));
   }
 
+  let staffMostrar = [];
+  if (staffProp) {
+    staffMostrar = staffProp.map(miembro => ({
+      ...miembro,
+      fecha_nacimiento: miembro.fecha_nacimiento.split("/").reverse().join("-")
+    }));
+  }
   const enteredTitleIsValid = formDatos.titulo.trim() !== "";
   const enteredAltIsValid = formDatos.alt.trim().length > 5 || img === "";
 
@@ -59,7 +66,7 @@ const EquipoForm = (props) => {
   const formSubmissionHandler = (e) => {
     e.preventDefault();
     if (formIsValid) {
-      formAction(formDatos.titulo, imgFile, formDatos.alt, jugadores, staff);
+      formAction(formDatos.titulo, imgFile, formDatos.alt, jugadores, staff, _id);
       history.push("/equipos");
     }
     if (!enteredTitleIsValid) {
@@ -81,15 +88,13 @@ const EquipoForm = (props) => {
     }
   ]);
 
-  console.log(jugadoresMostrar);
-
-  const [staff, setStaff] = useState(staffProp ? [
-    ...staffProp, {
+  const [staff, setStaff] = useState([
+    ...staffMostrar, {
       _id: `uuid_${uuid()}`,
       nombre: "",
       fecha_nacimiento: "",
       rol: ""
-    }] : staffProp);
+    }]);
 
   const changeCampoStaffHandler = (e, id, campo) => {
     const staffModificado = staff.map(miembroStaff => ((miembroStaff._id === id) ? { ...miembroStaff, [campo]: e.target.value } : miembroStaff));
@@ -156,7 +161,10 @@ const EquipoForm = (props) => {
       <TablaJugadores deleteFilaJugadorHandler={deleteFilaJugadorHandler} jugadores={jugadores} changeCampoJugadorHandler={changeCampoJugadorHandler} />
       <h4>Staff</h4>
       <TablaStaff deleteFilaStaffHandler={deleteFilaStaffHandler} staff={staff} changeCampoStaffHandler={changeCampoStaffHandler} />
-      <button type="submit" className="btn btn-primary">Crear equipo </button>
+      <button type="submit" className="btn btn-primary">
+        {tipo ? "Editar " : "Crear "}
+        equipo
+      </button>
     </form>
   );
 };

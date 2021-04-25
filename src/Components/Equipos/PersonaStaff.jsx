@@ -8,7 +8,7 @@ const PersonaStaff = ({
 }) => (
   <tr>
     <td>{nombre}</td>
-    <td>{nacimiento}</td>
+    <td>{nacimiento.split("-").reverse().join("/")}</td>
     <td className="ultima-fila">{rol}</td>
   </tr>
 );

@@ -9,6 +9,7 @@ import Equipo from "../../Components/Equipos/Equipo";
 
 const Equipos = () => {
   const { datosEquipos } = useContext(ContextoEquipos);
+  console.log(datosEquipos);
   return (
     <section>
       <ToastContainer autoClose={2000} />
