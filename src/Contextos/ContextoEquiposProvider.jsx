@@ -13,7 +13,7 @@ const ContextoEquiposProvider = (props) => {
   const { sendRequest: modificarEquipoRequest } = useHttp();
 
   useEffect(() => {
-    pedirEquipos("https://digitalclub.herokuapp.com/equipos");
+    pedirEquipos(`${process.env.REACT_APP_HEROKU_URL}/equipos`);
   }, [pedirEquipos]);
 
   const addEquipo = (nombre, alt, jugadores, staff, equipoData) => {
@@ -84,7 +84,7 @@ const ContextoEquiposProvider = (props) => {
     }
     sendEquipoRequest(
       {
-        url: "http://localhost:5000/equipos",
+        url: `${process.env.REACT_APP_HEROKU_URL}/equipos/`,
         method: "POST",
         body: datos
       },
@@ -181,7 +181,7 @@ const ContextoEquiposProvider = (props) => {
     }
     modificarEquipoRequest(
       {
-        url: `http://localhost:5000/equipos/${id}`,
+        url: `${process.env.REACT_APP_HEROKU_URL}/equipos/${id}`,
         method: "PUT",
         body: datos
       },
@@ -197,7 +197,7 @@ const ContextoEquiposProvider = (props) => {
   const eliminarEquipoHandler = (id) => {
     eliminarEquipoRequest(
       {
-        url: `https://digitalclub.herokuapp.com/equipos/${id}`,
+        url: `${process.env.REACT_APP_HEROKU_URL}/equipos/${id}`,
         method: "DELETE"
       },
       eliminarEquipo.bind(null, id)

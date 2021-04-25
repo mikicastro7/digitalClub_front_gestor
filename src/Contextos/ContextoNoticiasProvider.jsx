@@ -12,7 +12,7 @@ const ContextoNoticiasProvider = (props) => {
   const { sendRequest: eliminarNoticiaRequest } = useHttp();
   const { datos: datosNoticias, pedirDatos: pedirNoticias, setDatos: setNoticias } = useFetch();
   useEffect(() => {
-    pedirNoticias("https://digitalclub.herokuapp.com/noticias");
+    pedirNoticias(`${process.env.REACT_APP_HEROKU_URL}/noticias`);
   }, [pedirNoticias]);
 
   const addNoticia = (titulo, texto, alt, noticiaData) => {
@@ -49,7 +49,7 @@ const ContextoNoticiasProvider = (props) => {
 
     sendNoticiaRequest(
       {
-        url: "https://digitalclub.herokuapp.com/noticias",
+        url: `${process.env.REACT_APP_HEROKU_URL}/noticias`,
         method: "POST",
         body: datos,
       },
@@ -97,7 +97,7 @@ const ContextoNoticiasProvider = (props) => {
 
     editNoticiaRequest(
       {
-        url: `https://digitalclub.herokuapp.com/noticias/${id}`,
+        url: `${process.env.REACT_APP_HEROKU_URL}/noticias/${id}`,
         method: "PUT",
         body: datos,
       },
@@ -113,7 +113,7 @@ const ContextoNoticiasProvider = (props) => {
   const eliminarNoticiaHandler = async (id) => {
     eliminarNoticiaRequest(
       {
-        url: `https://digitalclub.herokuapp.com/noticias/${id}`,
+        url: `${process.env.REACT_APP_HEROKU_URL}/noticias/${id}`,
         method: "DELETE",
       },
       eliminarNoticia.bind(null, id)
