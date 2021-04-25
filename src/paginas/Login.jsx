@@ -27,10 +27,8 @@ const Login = () => {
       if (datos.error) {
         setErrorLogin(true);
       } else if (datos.token) {
-        console.log(datos.token);
-        console.log(datos);
         localStorage.setItem("token-acceso-api", datos.token);
-        history.push("/inicio");
+        history.push("/home");
       }
     }
   }, [datos, history]);
