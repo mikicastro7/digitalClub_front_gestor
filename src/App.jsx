@@ -3,7 +3,8 @@ import {
 } from "react-router-dom";
 import React from "react";
 import ContextoNoticiasProvider from "./Contextos/ContextoNoticiasProvider";
-import Navbar from "./Components/UIcomponents/Navbar";
+import NavbarDisplay from "./Components/UIcomponents/NavbarDisplay";
+import Login from "./paginas/Login";
 import MostrarNoticias from "./paginas/Noticias/MostrarNoticias";
 import AddNoticia from "./paginas/Noticias/AddNoticia";
 import EditarNoticia from "./paginas/Noticias/EditarNoticia";
@@ -17,41 +18,52 @@ import ContextoEquiposProvider from "./Contextos/ContextoEquiposProvider";
 const App = () => (
 
   <Router>
-    <Navbar />
+    <NavbarDisplay />
     <div className="container">
-      <ContextoNoticiasProvider>
-        <ContextoEquiposProvider>
-          <Switch>
-            <Route path="/noticias" exact>
-              <MostrarNoticias />
-            </Route>
-            <Route path="/noticias/crear-noticia" exact>
-              <AddNoticia />
-            </Route>
-            <Route path="/noticias/editar-noticia/:id" exact>
-              <EditarNoticia />
-            </Route>
-            <Route path="/equipos" exact>
-              <Equipos />
-            </Route>
-            <Route path="/equipos/crear-equipo" exact>
-              <AddEquip />
-            </Route>
-            <Route path="/equipos/editar-equipo/:id" exact>
-              <EditarEquipo />
-            </Route>
-            <Route path="/home" exact>
-              <PaginaPrincipalAuth />
-            </Route>
-            <Route path="/" exact>
-              <Redirect to="/home" />
-            </Route>
-            <Route path="*" exact>
-              <NotFoundPage />
-            </Route>
-          </Switch>
-        </ContextoEquiposProvider>
-      </ContextoNoticiasProvider>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/home" exact>
+          <PaginaPrincipalAuth />
+        </Route>
+        <Route path="/" exact>
+          <Redirect to="/home" />
+        </Route>
+        <Route path="/noticias" exact>
+          <ContextoNoticiasProvider>
+            <MostrarNoticias />
+          </ContextoNoticiasProvider>
+        </Route>
+        <Route path="/noticias/crear-noticia" exact>
+          <ContextoNoticiasProvider>
+            <AddNoticia />
+          </ContextoNoticiasProvider>
+        </Route>
+        <Route path="/noticias/editar-noticia/:id" exact>
+          <ContextoNoticiasProvider>
+            <EditarNoticia />
+          </ContextoNoticiasProvider>
+        </Route>
+        <Route path="/equipos" exact>
+          <ContextoEquiposProvider>
+            <Equipos />
+          </ContextoEquiposProvider>
+        </Route>
+        <Route path="/equipos/crear-equipo" exact>
+          <ContextoEquiposProvider>
+            <AddEquip />
+          </ContextoEquiposProvider>
+        </Route>
+        <Route path="/equipos/editar-equipo/:id" exact>
+          <ContextoEquiposProvider>
+            <EditarEquipo />
+          </ContextoEquiposProvider>
+        </Route>
+        <Route path="*" exact>
+          <NotFoundPage />
+        </Route>
+      </Switch>
     </div>
   </Router>
 );

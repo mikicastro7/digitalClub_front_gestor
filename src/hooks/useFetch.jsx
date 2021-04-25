@@ -2,12 +2,15 @@ import { useCallback, useState } from "react";
 
 const useFetch = () => {
   const [datos, setDatos] = useState(null);
-  const pedirDatos = useCallback(url => {
-    fetch(url)
-      .then(resp => resp.json())
-      .then(datosAPI => setDatos(datosAPI));
+  const pedirDatos = useCallback(async (url, opciones = {}) => {
+    const resp = await fetch(url, opciones);
+    const datos = await resp.json();
+    setDatos(datos);
   }, []);
-  return { datos, pedirDatos, setDatos };
+  return {
+    datos,
+    pedirDatos
+  };
 };
 
 export default useFetch;
