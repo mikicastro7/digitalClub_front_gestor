@@ -5,7 +5,6 @@ import ContextoUsuario from "../Contextos/ContextoUsuario";
 
 const RutaProtegida = (props) => {
   const { infoUsuario } = useContext(ContextoUsuario);
-  console.log(infoUsuario);
   const getRoute = () => {
     if (infoUsuario !== "cargando") {
       return infoUsuario.id ? <Route {...props} /> : <Redirect to="/login" />;

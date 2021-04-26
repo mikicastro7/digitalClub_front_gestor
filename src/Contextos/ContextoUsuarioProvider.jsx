@@ -12,7 +12,6 @@ const ContextoUsuarioProvider = (props) => {
   const { children } = props;
   const [infoUsuario, setInfoUsuario] = useState("cargando");
   const [errorLogin, setErrorLogin] = useState(false);
-  console.log(infoUsuario);
   const [token, setToken] = useState(localStorage.getItem("token-acceso-api"));
 
   const loginUsuario = (e, formDatos) => {

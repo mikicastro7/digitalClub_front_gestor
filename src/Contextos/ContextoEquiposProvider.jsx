@@ -86,7 +86,10 @@ const ContextoEquiposProvider = (props) => {
       {
         url: `${process.env.REACT_APP_HEROKU_URL}/equipos/`,
         method: "POST",
-        body: datos
+        body: datos,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token-acceso-api")}`
+        }
       },
       addEquipo.bind(null, nombre, alt, jugadoresNuevo, staffNuevo)
     );
@@ -120,7 +123,6 @@ const ContextoEquiposProvider = (props) => {
             alt
           }
         };
-        console.log(datosEquipos);
         setEquipos({
           total: datosEquipos.total,
           datos: datosEquipos.datos.map(equipo => (equipo._id === id ? {
@@ -152,7 +154,6 @@ const ContextoEquiposProvider = (props) => {
           alt
         }
       };
-      console.log(datosEquipos);
       setEquipos({
         total: datosEquipos.total,
         datos: datosEquipos.datos.map(equipo => (equipo._id === id ? {
