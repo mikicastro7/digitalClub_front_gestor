@@ -25,6 +25,14 @@ const ContextoUsuarioProvider = (props) => {
       body: JSON.stringify(formDatos)
     });
   };
+
+  const logoutUsuario = () => {
+    setInfoUsuario({});
+    setErrorLogin(false);
+    localStorage.clear();
+    history.push("/home");
+  };
+
   useEffect(() => {
     if (datos) {
       if (datos.error) {
@@ -40,7 +48,10 @@ const ContextoUsuarioProvider = (props) => {
     setInfoUsuario(token ? jwt_decode(token) : {});
   }, [token]);
   return (
-    <ContextoUsuario.Provider value={{ infoUsuario, loginUsuario, errorLogin }}>
+    <ContextoUsuario.Provider value={{
+      infoUsuario, loginUsuario, logoutUsuario, errorLogin
+    }}
+    >
       { children}
     </ContextoUsuario.Provider>
   );
