@@ -52,6 +52,9 @@ const ContextoNoticiasProvider = (props) => {
         url: `${process.env.REACT_APP_HEROKU_URL}/noticias`,
         method: "POST",
         body: datos,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token-acceso-api")}`
+        }
       },
       addNoticia.bind(null, titulo, texto, alt)
     );
@@ -99,6 +102,9 @@ const ContextoNoticiasProvider = (props) => {
         url: `${process.env.REACT_APP_HEROKU_URL}/noticias/${id}`,
         method: "PUT",
         body: datos,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token-acceso-api")}`
+        }
       },
       editNoticia.bind(null, titulo, texto, id, alt, foto)
     );
@@ -114,6 +120,9 @@ const ContextoNoticiasProvider = (props) => {
       {
         url: `${process.env.REACT_APP_HEROKU_URL}/noticias/${id}`,
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token-acceso-api")}`
+        }
       },
       eliminarNoticia.bind(null, id)
     );
