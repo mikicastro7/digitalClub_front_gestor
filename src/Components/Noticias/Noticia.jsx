@@ -25,7 +25,7 @@ const Noticia = ({
     eliminarNoticiaHandler(_id);
     handleClose();
   };
-  const arrayTexto = texto.split("\n\n");
+  const arrayTexto = texto.split("\n").filter(parrafo => parrafo !== "");
   const formatDate = () => {
     const date = new Date(createdAt);
     const minutos = date.getMinutes();
