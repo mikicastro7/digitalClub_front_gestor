@@ -2,6 +2,7 @@ import {
   BrowserRouter as Router, Switch, Route, Redirect
 } from "react-router-dom";
 import React from "react";
+import RutaProtegida from "./Components/RutaProtegida";
 import NavbarDisplay from "./Components/UIcomponents/NavbarDisplay";
 import Login from "./paginas/Login";
 import MostrarNoticias from "./paginas/Noticias/MostrarNoticias";
@@ -32,36 +33,36 @@ const App = () => (
           <Route path="/" exact>
             <Redirect to="/home" />
           </Route>
-          <Route path="/noticias" exact>
+          <RutaProtegida path="/noticias" exact>
             <ContextoNoticiasProvider>
               <MostrarNoticias />
             </ContextoNoticiasProvider>
-          </Route>
-          <Route path="/noticias/crear-noticia" exact>
+          </RutaProtegida>
+          <RutaProtegida path="/noticias/crear-noticia" exact>
             <ContextoNoticiasProvider>
               <AddNoticia />
             </ContextoNoticiasProvider>
-          </Route>
-          <Route path="/noticias/editar-noticia/:id" exact>
+          </RutaProtegida>
+          <RutaProtegida path="/noticias/editar-noticia/:id" exact>
             <ContextoNoticiasProvider>
               <EditarNoticia />
             </ContextoNoticiasProvider>
-          </Route>
-          <Route path="/equipos" exact>
+          </RutaProtegida>
+          <RutaProtegida path="/equipos" exact>
             <ContextoEquiposProvider>
               <Equipos />
             </ContextoEquiposProvider>
-          </Route>
-          <Route path="/equipos/crear-equipo" exact>
+          </RutaProtegida>
+          <RutaProtegida path="/equipos/crear-equipo" exact>
             <ContextoEquiposProvider>
               <AddEquip />
             </ContextoEquiposProvider>
-          </Route>
-          <Route path="/equipos/editar-equipo/:id" exact>
+          </RutaProtegida>
+          <RutaProtegida path="/equipos/editar-equipo/:id" exact>
             <ContextoEquiposProvider>
               <EditarEquipo />
             </ContextoEquiposProvider>
-          </Route>
+          </RutaProtegida>
           <Route path="*" exact>
             <NotFoundPage />
           </Route>
