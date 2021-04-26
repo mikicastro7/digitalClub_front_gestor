@@ -25,7 +25,7 @@ const Noticia = ({
     eliminarNoticiaHandler(_id);
     handleClose();
   };
-
+  const arrayTexto = texto.split("\n\n");
   const formatDate = () => {
     const date = new Date(createdAt);
     const minutos = date.getMinutes();
@@ -42,7 +42,9 @@ const Noticia = ({
       <Collapse in={open}>
         <ul className="noticia-content text-justify list-unstyled">
           <li>
-            <p>{texto}</p>
+            {arrayTexto.map(parrafo => (
+              <p className="parrafo-noticia">{parrafo}</p>
+            ))}
           </li>
           {img && <img src={img.link} alt={img.alt} />}
           <p className="noticia-dates">
