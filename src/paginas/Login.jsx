@@ -1,37 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import React, { useEffect, useState, useContext } from "react";
 import useForm from "../hooks/useForm";
 import useFetch from "../hooks/useFetch";
+import ContextoUsuario from "../Contextos/ContextoUsuario";
 
 const Login = () => {
-  const history = useHistory();
-  const [errorLogin, setErrorLogin] = useState(false);
-  const { datos, pedirDatos } = useFetch();
+  const { loginUsuario, errorLogin } = useContext(ContextoUsuario);
+
   const { formDatos, modificarDatos } = useForm({
     user: "",
     password: ""
   });
-  const acceder = e => {
-    e.preventDefault();
-    pedirDatos(`${process.env.REACT_APP_HEROKU_URL}/usuarios/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formDatos)
-    });
+
+  const submitLogin = (e) => {
+    loginUsuario(e, formDatos);
   };
-  useEffect(() => {
-    if (datos) {
-      if (datos.error) {
-        setErrorLogin(true);
-      } else if (datos.token) {
-        localStorage.setItem("token-acceso-api", datos.token);
-        history.push("/home");
-      }
-    }
-  }, [datos, history]);
 
   return (
     <section>
@@ -44,7 +27,7 @@ const Login = () => {
         <div className="bodyForm">
           <h3 className="formTitle">Bienvenido Login</h3>
           {errorLogin && <p style={{ textAlign: "center", color: "red" }}>Error de credenciales</p>}
-          <form onSubmit={acceder} autoComplete="off">
+          <form onSubmit={(e) => submitLogin(e)} autoComplete="off">
             <label htmlFor="usuario" className="formLabel">Usuario</label>
             <input
               name="user"

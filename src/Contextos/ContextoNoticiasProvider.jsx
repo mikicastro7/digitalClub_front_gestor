@@ -94,7 +94,7 @@ const ContextoNoticiasProvider = (props) => {
     datos.append("titulo", titulo);
     datos.append("texto", texto);
     datos.append("alt", alt);
-
+    console.log(texto.split("\n").join("\n"));
     editNoticiaRequest(
       {
         url: `${process.env.REACT_APP_HEROKU_URL}/noticias/${id}`,
