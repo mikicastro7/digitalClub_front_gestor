@@ -9,7 +9,8 @@ const useFetch = () => {
   }, []);
   return {
     datos,
-    pedirDatos
+    pedirDatos,
+    setDatos
   };
 };
 
