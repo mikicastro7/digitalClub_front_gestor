@@ -184,7 +184,10 @@ const ContextoEquiposProvider = (props) => {
       {
         url: `${process.env.REACT_APP_HEROKU_URL}/equipos/${id}`,
         method: "PUT",
-        body: datos
+        body: datos,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token-acceso-api")}`
+        }
       },
       updateEquipo.bind(null, nombre, alt, jugadoresNuevo, staffNuevo, id, foto)
     );
@@ -199,7 +202,10 @@ const ContextoEquiposProvider = (props) => {
     eliminarEquipoRequest(
       {
         url: `${process.env.REACT_APP_HEROKU_URL}/equipos/${id}`,
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token-acceso-api")}`
+        }
       },
       eliminarEquipo.bind(null, id)
     );
