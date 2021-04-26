@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ContextoUsuario from "../../Contextos/ContextoUsuario";
 
 const NavbarComponent = () => {
-  const { logoutUsuario } = useContext(ContextoUsuario);
+  const { logoutUsuario, infoUsuario } = useContext(ContextoUsuario);
   return (
     <Navbar bg="primary" variant="dark" expand="lg">
       <div className="container">
@@ -16,10 +16,9 @@ const NavbarComponent = () => {
               <NavDropdown.Item as={Link} to="/noticias">Noticias</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/equipos">Equipos</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link as={Link} to="/us">Usuarios</Nav.Link>
           </Nav>
           <Nav className="ml-auto nav-last">
-            <NavDropdown title="Usuario" id="basic-nav-dropdown">
+            <NavDropdown title={infoUsuario.user} id="basic-nav-dropdown">
               <NavDropdown.Item onClick={logoutUsuario}>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>
