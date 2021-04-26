@@ -10,10 +10,10 @@ const ContextoUsuarioProvider = (props) => {
   const history = useHistory();
   const { datos, pedirDatos } = useFetch();
   const { children } = props;
-  const [infoUsuario, setInfoUsuario] = useState({});
+  const [infoUsuario, setInfoUsuario] = useState("cargando");
   const [errorLogin, setErrorLogin] = useState(false);
   console.log(infoUsuario);
-  const token = localStorage.getItem("token-acceso-api");
+  const [token, setToken] = useState(localStorage.getItem("token-acceso-api"));
 
   const loginUsuario = (e, formDatos) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const ContextoUsuarioProvider = (props) => {
   };
 
   const logoutUsuario = () => {
-    setInfoUsuario({});
+    setInfoUsuario("cargando");
     setErrorLogin(false);
     localStorage.clear();
     history.push("/home");
@@ -38,14 +38,15 @@ const ContextoUsuarioProvider = (props) => {
       if (datos.error) {
         setErrorLogin(true);
       } else if (datos.token) {
-        setInfoUsuario(token ? jwt_decode(token) : {});
+        setToken(datos.token);
+        setInfoUsuario(token ? jwt_decode(token) : false);
         localStorage.setItem("token-acceso-api", datos.token);
         history.push("/home");
       }
     }
-  }, [datos, history]);
+  }, [datos, history, token]);
   useEffect(() => {
-    setInfoUsuario(token ? jwt_decode(token) : {});
+    setInfoUsuario(token ? jwt_decode(token) : false);
   }, [token]);
   return (
     <ContextoUsuario.Provider value={{
