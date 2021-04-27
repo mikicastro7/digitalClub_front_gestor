@@ -4,6 +4,7 @@ import {
 import React from "react";
 import RutaProtegida from "./Components/RutaProtegida";
 import NavbarDisplay from "./Components/UIcomponents/NavbarDisplay";
+import Footer from "./Components/UIcomponents/Footer";
 import Login from "./paginas/Login";
 import MostrarNoticias from "./paginas/Noticias/MostrarNoticias";
 import AddNoticia from "./paginas/Noticias/AddNoticia";
@@ -68,6 +69,7 @@ const App = () => (
           </Route>
         </Switch>
       </div>
+      <Footer />
     </ContextoUsuarioProvider>
   </Router>
 );
