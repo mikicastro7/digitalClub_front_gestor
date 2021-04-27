@@ -11,7 +11,7 @@ html {
 body {
   position: relative;
   margin: 0;
-  padding-bottom: 200px;
+  padding-bottom: 500px;
   min-height: 100%;
 }
 
@@ -377,15 +377,24 @@ section h1 {
   .tabla-personas {
     width: 90%
   }
+
+  body {
+    padding-bottom: 200px;
+  }
+
+  .centerForm {
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 300px;
+  }
 }
 
 
 .centerForm {
-  position: fixed;
-  left: 50%;
-  top: 53%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  margin: 40px auto;
   width: 300px;
 }
 
